@@ -1,18 +1,21 @@
-.homePage {
+.homeWrapper {
     text-align: center;
-    font-size: 24px;
-    color: #388e3c;
-    margin-top: 100px;
+    padding: 40px 20px;
+    background-color: #f0fff0;
+    border-radius: 20px;
+    max-width: 600px;
+    margin: 50px auto;
+    box-shadow: 0 8px 16px rgba(0, 128, 0, 0.1);
 }
 
-.homePage h1 {
+.homeWrapper h1 {
     font-size: 36px;
-    font-weight: bold;
-    color: #2c6d47;
+    margin-bottom: 20px;
+    color: #007f00;
 }
 
-.homePage p {
-    font-size: 20px;
-    margin-top: 20px;
-    color: #388e3c;
+.homeWrapper p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 10px;
 }

@@ -2,11 +2,11 @@ import css from './LoginForm.module.css';
 import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { logIn } from '../../redux/auth/operations'; // змінили login на logIn
+import { logIn } from '../../redux/auth/operations'; 
 
 const validationSchema = Yup.object({
-  email: Yup.string().email('Некоректна пошта').required('Email обовʼязковий'),
-  password: Yup.string().min(6, 'Мінімум 6 символів').required('Пароль обовʼязковий'),
+  email: Yup.string().email('Wrong email').required('Email required'),
+  password: Yup.string().min(6, 'Min 6 characters').required('Password required'),
 });
 
 export default function LoginForm() {
@@ -16,14 +16,14 @@ export default function LoginForm() {
     initialValues: { email: '', password: '' },
     validationSchema,
     onSubmit: values => {
-      dispatch(logIn(values)); // використовується logIn
+      dispatch(logIn(values));
     },
   });
 
   return (
     <div className={css.wrapper}>
       <form onSubmit={formik.handleSubmit} className={css.form}>
-        <h2 className={css.title}>Вхід</h2>
+        <h2 className={css.title}>Log in</h2>
 
         <label className={css.label}>
           Email
@@ -40,7 +40,7 @@ export default function LoginForm() {
         </label>
 
         <label className={css.label}>
-          Пароль
+          Password
           <input
             className={css.input}
             type="password"
@@ -54,7 +54,7 @@ export default function LoginForm() {
         </label>
 
         <button type="submit" className={css.button}>
-          Увійти
+          Log in
         </button>
       </form>
     </div>

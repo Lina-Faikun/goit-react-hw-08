@@ -5,9 +5,9 @@ import * as Yup from 'yup';
 import { register } from '../../redux/auth/operations';
 
 const validationSchema = Yup.object({
-  name: Yup.string().min(2, 'Мінімум 2 символи').required("Ім'я обов'язкове"),
-  email: Yup.string().email('Некоректна пошта').required('Email обовʼязковий'),
-  password: Yup.string().min(6, 'Мінімум 6 символів').required('Пароль обовʼязковий'),
+  name: Yup.string().min(2, 'Min 2 characters').required("Name required"),
+  email: Yup.string().email('Wrong Email').required('Email required'),
+  password: Yup.string().min(6, 'Min 6 characters').required('Password required'),
 });
 
 export default function RegistrationForm() {
@@ -24,10 +24,10 @@ export default function RegistrationForm() {
   return (
     <div className={css.wrapper}>
       <form onSubmit={formik.handleSubmit} className={css.form}>
-        <h2 className={css.title}>Реєстрація</h2>
+        <h2 className={css.title}>Registration</h2>
 
         <label className={css.label}>
-          Імʼя
+          Name
           <input
             className={css.input}
             type="text"
@@ -55,7 +55,7 @@ export default function RegistrationForm() {
         </label>
 
         <label className={css.label}>
-          Пароль
+          Password
           <input
             className={css.input}
             type="password"
@@ -69,7 +69,7 @@ export default function RegistrationForm() {
         </label>
 
         <button type="submit" className={css.button}>
-          Зареєструватися
+          Sign up
         </button>
       </form>
     </div>

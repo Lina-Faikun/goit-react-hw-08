@@ -1,0 +1,27 @@
+
+.navigationBox {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navigationEl {
+    text-decoration: none;
+    color: #0a460a;
+    font-size: 18px;
+    font-weight: 600;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.navigationEl:hover,
+.navigationEl:focus {
+    color: #00aa00;
+    transform: scale(1.1);
+}
+
+.active {
+    color: #007f00;
+    border-bottom: 2px solid #007f00;
+}
