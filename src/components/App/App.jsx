@@ -1,39 +1,16 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchContacts } from '../../redux/contactsOps';
-import {
-  selectLoading,
-  selectError,
-} from '../../redux/contactsSlice';
-import ContactList from '../ContactList/ContactList';
-import SearchBox from '../SearchBox/SearchBox';
-import ContactForm from '../ContactForm/ContactForm';
+import { useSelector } from "react-redux";
+import { selectIsLoggedIn } from "../../redux/auth/selectors";
+import AuthNav from "../AuthNav/AuthNav";
+import Navigation from "../Navigation/Navigation";
+import UserMenu from "../Layout";
 
-import css from './App.module.css';
-
-const App = () => {
-  const dispatch = useDispatch();
-
-  const loading = useSelector(selectLoading);
-  const error = useSelector(selectError);
-
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
-
+import css from "./AppBar.module.css";
+export default function AppBar() {
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   return (
-    <div className={css.container}>
-      <h1 className={css.title}>Contact Book</h1>
-
-      <ContactForm />
-      <SearchBox />
-
-      {loading && <p>Loading...</p>}
-      {error && <p>Error: {error}</p>}
-
-      <ContactList />
+    <div className={css.appBar}>
+      <Navigation />
+      {isLoggedIn ? <UserMenu /> : <AuthNav />}
     </div>
   );
-};
-
-export default App;
+}

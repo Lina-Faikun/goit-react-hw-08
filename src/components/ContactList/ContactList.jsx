@@ -1,31 +1,16 @@
-import { useDispatch, useSelector } from 'react-redux';
-import Contact from '../Contact/Contact'; 
-import { selectFilteredContacts, selectLoading, selectError } from '../../redux/selectors'; 
-import styles from './ContactList.module.css'; 
+import { useSelector } from "react-redux";
+import Contact from "../Contact/Contact";
+import css from "./ContactList.module.css";
+import { selectFilteredContacts } from "../../redux/contacts/selectors";
 
-const ContactList = () => {
-  const dispatch = useDispatch();
-  const contacts = useSelector(selectFilteredContacts); 
-  const loading = useSelector(selectLoading);
-  const error = useSelector(selectError);
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    return <p>Error: {error}</p>;
-  }
+export default function ContactList() {
+  const filterValue = useSelector(selectFilteredContacts);
 
   return (
-    <div className={styles.contactList}>
-      {contacts.length === 0 ? (
-        <p>No contacts found</p>
-      ) : (
-        contacts.map((contact) => <Contact key={contact.id} contact={contact} />)
-      )}
+    <div className={css.contactList}>
+      {filterValue.map((el) => (
+        <Contact key={el.id} user={el} />
+      ))}
     </div>
   );
-};
-
-export default ContactList;
+}

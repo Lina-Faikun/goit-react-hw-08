@@ -1,28 +1,29 @@
-import { useDispatch } from 'react-redux';
-import { deleteContact } from '../../redux/contactsOps';
-import css from './Contact.module.css';
+import css from "./Contact.module.css";
 
-const Contact = ({ contact: { id, name, number } }) => {
+import { useDispatch, useSelector } from "react-redux";
+import { deleteContact } from "../../redux/contacts/operations";
+
+export default function Contact({ user: { id, name, number } }) {
   const dispatch = useDispatch();
-
-  const handleDelete = () => {
+  const handleClick = () => {
     dispatch(deleteContact(id));
   };
-
   return (
-    <div className={css.card}>
-      <span className={css.name}>
-        {name}: <span className={css.number}>{number}</span>
-      </span>
-      <button
-        className={css.button}
-        onClick={handleDelete}
-        aria-label={`Delete contact ${name}`}
-      >
+    <div className={css.card} id={id}>
+      <div>
+        <div className={css.boxName}>
+          <BiSolidUser className={css.iconUser} />
+          <p className={css.title}>{name}</p>
+        </div>
+        <div className={css.boxName}>
+          <BiPhone className={css.iconUser} />
+          <p>{number}</p>
+        </div>
+      </div>
+
+      <button className={css.button} onClick={handleClick}>
         Delete
       </button>
     </div>
   );
-};
-
-export default Contact;
+}
