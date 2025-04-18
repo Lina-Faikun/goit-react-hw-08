@@ -1,54 +1,77 @@
-import { useDispatch } from "react-redux";
-import { toast } from "react-hot-toast";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import { register } from "../../redux/auth/operations";
-import css from "./RegistrationForm.module.css";
+import css from './RegistrationForm.module.css';
+import { useDispatch } from 'react-redux';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { register } from '../../redux/auth/operations';
+
+const validationSchema = Yup.object({
+  name: Yup.string().min(2, 'Мінімум 2 символи').required("Ім'я обов'язкове"),
+  email: Yup.string().email('Некоректна пошта').required('Email обовʼязковий'),
+  password: Yup.string().min(6, 'Мінімум 6 символів').required('Пароль обовʼязковий'),
+});
 
 export default function RegistrationForm() {
   const dispatch = useDispatch();
-  const handleSubmit = (values, action) => {
-    // dispatch(register(values));
-    dispatch(register(values))
-      .unwrap()
-      .then(() => {
-        toast.success("Welcome");
-      })
-      .catch(() => {
-        toast.error(" Not valid !");
-      });
-    action.resetForm();
-  };
+
+  const formik = useFormik({
+    initialValues: { name: '', email: '', password: '' },
+    validationSchema,
+    onSubmit: values => {
+      dispatch(register(values));
+    },
+  });
 
   return (
-    <>
-      <h2>Registration Form</h2>
-      <Formik
-        initialValues={{
-          name: "",
-          email: "",
-          password: "",
-        }}
-        onSubmit={handleSubmit}
-      >
-        <Form action="#" className={css.formik}>
-          <label htmlFor="name">name</label>
-          <Field type="text" id="name" name="name" className={css.input} />
+    <div className={css.wrapper}>
+      <form onSubmit={formik.handleSubmit} className={css.form}>
+        <h2 className={css.title}>Реєстрація</h2>
 
-          <label htmlFor="email">email</label>
-          <Field type="email" id="email" name="email" className={css.input} />
-
-          <label htmlFor="password">password</label>
-          <Field
-            type="password"
-            id="password"
-            name="password"
+        <label className={css.label}>
+          Імʼя
+          <input
             className={css.input}
+            type="text"
+            name="name"
+            onChange={formik.handleChange}
+            value={formik.values.name}
           />
-          <button type="submit" className={css.button}>
-            Register
-          </button>
-        </Form>
-      </Formik>
-    </>
+          {formik.touched.name && formik.errors.name && (
+            <p className={css.error}>{formik.errors.name}</p>
+          )}
+        </label>
+
+        <label className={css.label}>
+          Email
+          <input
+            className={css.input}
+            type="email"
+            name="email"
+            onChange={formik.handleChange}
+            value={formik.values.email}
+          />
+          {formik.touched.email && formik.errors.email && (
+            <p className={css.error}>{formik.errors.email}</p>
+          )}
+        </label>
+
+        <label className={css.label}>
+          Пароль
+          <input
+            className={css.input}
+            type="password"
+            name="password"
+            onChange={formik.handleChange}
+            value={formik.values.password}
+          />
+          {formik.touched.password && formik.errors.password && (
+            <p className={css.error}>{formik.errors.password}</p>
+          )}
+        </label>
+
+        <button type="submit" className={css.button}>
+          Зареєструватися
+        </button>
+      </form>
+    </div>
   );
 }
