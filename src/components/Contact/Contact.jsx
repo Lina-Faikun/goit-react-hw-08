@@ -1,5 +1,5 @@
 import css from "./Contact.module.css";
-
+import { BiSolidUser, BiPhone } from "react-icons/bi"; 
 import { useDispatch, useSelector } from "react-redux";
 import { deleteContact } from "../../redux/contacts/operations";
 

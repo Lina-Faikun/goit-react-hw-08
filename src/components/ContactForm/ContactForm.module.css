@@ -1,0 +1,51 @@
+.formik {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #f1f8f4;
+    padding: 20px;
+    border-radius: 12px;
+    border: 2px solid #a5d6a7;
+    box-shadow: 0 4px 8px rgba(34, 139, 34, 0.1);
+}
+h2 {
+    text-align: center;
+    color: #2e7d32;
+    margin-bottom: 20px;
+}
+
+.input {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #81c784;
+    background-color: #ffffff;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.input:focus {
+    outline: none;
+    border-color: #388e3c;
+}
+
+.button {
+    background-color: #4caf50;
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #388e3c;
+}
+
+.error {
+    color: #d32f2f;
+    font-size: 14px;
+}

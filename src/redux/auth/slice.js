@@ -1,3 +1,4 @@
+
 import { createSlice } from "@reduxjs/toolkit";
 import { register, logIn, logOut, refreshUser } from "./operations";
 
@@ -42,4 +43,5 @@ const slice = createSlice({
       });
   },
 });
+
 export default slice.reducer;

@@ -1,41 +1,29 @@
 import * as Yup from "yup";
-import { useId } from "react";
-
-import { nanoid } from "nanoid";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import css from "./ContactForm.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addContact } from "../../redux/contacts/operations";
 
 export default function ContactForm() {
-  const idName = useId();
-  const idNumber = useId();
-  const idCard = nanoid();
+  const dispatch = useDispatch();
+
   const initialValues = {
-    id: idCard,
     name: "",
     number: "",
   };
-  const newValidateWidthYupCard = Yup.object().shape({
-    id: Yup.string(),
+
+  const validationSchema = Yup.object().shape({
     name: Yup.string()
-      .min(2, "Too Short!")
-      .max(50, "Too Long!")
-      .required("Обов`язково до заповнення"),
+      .min(2, "Занадто коротке ім’я!")
+      .max(50, "Занадто довге ім’я!")
+      .required("Обов’язково до заповнення"),
     number: Yup.string()
       .matches(/^\d+$/, "Тільки цифри!")
-      .required("Обов`язково до заповнення"),
+      .required("Обов’язково до заповнення"),
   });
 
-  const dispatch = useDispatch();
-  const handleSubmitFormik = (values, { resetForm }) => {
-    dispatch(
-      addContact({
-        name: values.name.trim() || "",
-        number: values.number.trim() || "111111",
-      })
-    );
-
+  const handleSubmit = (values, { resetForm }) => {
+    dispatch(addContact(values));
     resetForm();
   };
 
@@ -44,21 +32,18 @@ export default function ContactForm() {
       <h2>Форма додавання контактів</h2>
       <Formik
         initialValues={initialValues}
-        validationSchema={newValidateWidthYupCard}
-        onSubmit={handleSubmitFormik}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
       >
         <Form className={css.formik}>
-          <label htmlFor={idName}>Name</label>
-          <Field className={css.input} type="text" id={idName} name="name" />
+          <label htmlFor="name">Name</label>
+          <Field className={css.input} type="text" name="name" />
           <ErrorMessage className={css.error} name="name" component="span" />
-          <label htmlFor={idNumber}>Number</label>
-          <Field
-            className={css.input}
-            type="text"
-            id={idNumber}
-            name="number"
-          />
+
+          <label htmlFor="number">Number</label>
+          <Field className={css.input} type="text" name="number" />
           <ErrorMessage className={css.error} name="number" component="span" />
+
           <button className={css.button} type="submit">
             Add contact
           </button>

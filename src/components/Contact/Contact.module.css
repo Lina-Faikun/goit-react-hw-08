@@ -1,0 +1,47 @@
+.card {
+    background-color: #e6f4ea;
+    border: 2px solid #a5d6a7;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 6px rgba(0, 128, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: scale(1.01);
+}
+
+.boxName {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.iconUser {
+    margin-right: 8px;
+    color: #388e3c;
+    font-size: 20px;
+}
+
+.title {
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+.button {
+    background-color: #66bb6a;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #43a047;
+}
