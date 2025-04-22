@@ -1,0 +1,9 @@
+.contactsList {
+    list-style-type: none;
+    padding: 0;
+}
+
+.contactsList li {
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+}
